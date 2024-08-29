@@ -12,7 +12,7 @@
           v-for="item in navigationItems"
           :key="item.title"
           :to="item.href"
-          :class="`d-flex ga-1 text-decoration-none pa-2 color-white ${
+          :class="`d-flex ga-1 text-decoration-none pa-2 color-white rounded-sm ${
             !rail ? 'justify-start' : 'justify-center'
           }`"
         >
@@ -48,6 +48,16 @@ export default {
       navigationItems: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', href: '/' },
         { title: 'Transactions', icon: 'mdi-cash', href: '/transactions' },
+        {
+          title: 'Savings',
+          icon: 'mdi-piggy-bank-outline',
+          href: '/savings',
+        },
+        {
+          title: 'Objectives',
+          icon: 'mdi-trophy-outline',
+          href: '/objectives',
+        },
       ],
       toggleRail,
     };
