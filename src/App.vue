@@ -2,7 +2,7 @@
   <v-app>
     <Sidebar />
     <v-main>
-      <v-container fluid class="bg-grey-lighten-4 h-100">
+      <v-container fluid class="bg-grey-lighten-3 h-100">
         <router-view />
       </v-container>
     </v-main>
