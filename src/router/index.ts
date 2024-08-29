@@ -12,7 +12,17 @@ const router = createRouter({
     {
       path: '/transactions',
       name: 'transactions',
-      component: () => import('../views/AboutView.vue'),
+      component: () => import('../views/TransactionsView.vue'),
+    },
+    {
+      path: '/objectives',
+      name: 'objectives',
+      component: () => import('../views/ObjectivesView.vue'),
+    },
+    {
+      path: '/savings',
+      name: 'savings',
+      component: () => import('../views/SavingsView.vue'),
     },
   ],
   linkActiveClass: 'active',
