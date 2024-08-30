@@ -78,7 +78,7 @@ import { Chart as ChartJS, registerables, type ChartData } from 'chart.js';
 import { computed } from 'vue';
 import WrappedCard from '@/components/ui/WrappedCard.vue';
 import { useStore } from 'vuex';
-import { key } from '@/state';
+import { key } from '@/store';
 
 ChartJS.register(...registerables);
 

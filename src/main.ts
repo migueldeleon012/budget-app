@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import store, { key } from './state';
+import store, { key } from './store';
 import { vuetify } from './assets/vuetify';
 const app = createApp(App);
 
