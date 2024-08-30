@@ -9,7 +9,7 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 import Sidebar from './components/TheSidebar.vue';
 
 export default {

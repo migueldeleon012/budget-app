@@ -41,15 +41,22 @@
   </v-card>
 </template>
 
-<script>
-import TextWithProgress from '@/components/ui/TextWithProgress.vue';
+<script lang="ts">
+import { type PropType } from 'vue';
+import TextWithProgress from './TextWithProgress.vue';
+
+interface Data {
+  title: string;
+  costPerMonth?: number;
+  contribution?: number;
+}
 
 export default {
   components: { 'text-with-progress': TextWithProgress },
   props: {
     data: {
-      type: Array,
-      required: true,
+      type: Array as PropType<Data[]>,
+      required: false,
     },
     title: {
       type: String,

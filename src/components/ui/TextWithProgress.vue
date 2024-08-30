@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-space-between align-center mb-2">
+  <div class="d-flex justify-space-betw\een align-center mb-2">
     <span class="font-weight-bold text-body-1">{{ title }}</span>
     <slot>
       <span>
@@ -13,7 +13,7 @@
   ></v-progress-linear>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     title: {
@@ -22,12 +22,12 @@ export default {
     },
     contribution: {
       type: Number,
-      required: false,
+      required: true,
       default: 0,
     },
     costPerMonth: {
       type: Number,
-      required: false,
+      required: true,
       default: 100,
     },
   },

@@ -72,11 +72,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Doughnut } from 'vue-chartjs';
-import { Chart as ChartJS, registerables } from 'chart.js';
+import { Chart as ChartJS, registerables, type ChartData } from 'chart.js';
 import { computed, ref } from 'vue';
-import WrappedCard from '../components/ui/WrappedCard.vue';
+import WrappedCard from '@/components/ui/WrappedCard.vue';
 
 ChartJS.register(...registerables);
 
@@ -91,14 +91,16 @@ export default {
     const spent = ref(10000);
     const moneyLeft = computed(() => income.value - spent.value);
 
+    const doughnutChartData: ChartData<'doughnut', number[], unknown> = {
+      labels: ['Spent', 'To Spend'],
+      datasets: [{ data: [spent.value, moneyLeft.value] }],
+    };
+
     return {
       income,
       spent,
       moneyLeft,
-      doughnutChartData: {
-        labels: ['Spent', 'To Spend'],
-        datasets: [{ data: [spent, moneyLeft] }],
-      },
+      doughnutChartData,
       objectives: [
         {
           title: 'IPhone',
