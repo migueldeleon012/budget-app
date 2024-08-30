@@ -21,7 +21,7 @@
             </div>
             <div>
               <p class="text-subtitle-1">You still have</p>
-              <p class="text-h5 font-weight-bold">$ {{ moneyLeft }}</p>
+              <p class="text-h5 font-weight-bold">$ {{ income - spent }}</p>
             </div>
           </div>
         </v-card-text>
@@ -75,8 +75,10 @@
 <script lang="ts">
 import { Doughnut } from 'vue-chartjs';
 import { Chart as ChartJS, registerables, type ChartData } from 'chart.js';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import WrappedCard from '@/components/ui/WrappedCard.vue';
+import { useStore } from 'vuex';
+import { key } from '@/state';
 
 ChartJS.register(...registerables);
 
@@ -87,50 +89,23 @@ export default {
   },
 
   setup() {
-    const income = ref(28000);
-    const spent = ref(10000);
-    const moneyLeft = computed(() => income.value - spent.value);
+    const store = useStore(key);
+    const { income, spent, transactions, objectives, savings } = store.state;
+
+    const moneyLeft = computed(() => income - spent);
 
     const doughnutChartData: ChartData<'doughnut', number[], unknown> = {
       labels: ['Spent', 'To Spend'],
-      datasets: [{ data: [spent.value, moneyLeft.value] }],
+      datasets: [{ data: [spent, moneyLeft.value] }],
     };
 
     return {
       income,
       spent,
-      moneyLeft,
+      transactions,
+      objectives,
+      savings,
       doughnutChartData,
-      objectives: [
-        {
-          title: 'IPhone',
-          contribution: 250,
-          costPerMonth: 500,
-        },
-        {
-          title: 'Macbook',
-          contribution: 300,
-          costPerMonth: 1000,
-        },
-      ],
-      savings: [
-        {
-          title: 'Wedding',
-          contribution: 250,
-          costPerMonth: 500,
-        },
-        {
-          title: 'Vacation',
-          contribution: 300,
-          costPerMonth: 1000,
-        },
-      ],
-      transactions: [
-        { id: 1, name: 'Phone Case', price: 980, positive: false },
-        { id: 12, name: 'Salary', price: 28000, positive: true },
-        { id: 13, name: 'Lunch', price: 1200, positive: false },
-        { id: 14, name: 'Coffee', price: 580, positive: false },
-      ],
     };
   },
 };
