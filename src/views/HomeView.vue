@@ -53,11 +53,11 @@
       >
         <v-card-text class="flex-1-1-0 overflow-auto">
           <div
-            v-for="{ id, name, price, positive } in transactions"
+            v-for="{ id, title, price, positive } in transactions"
             :key="id"
             class="mb-6 d-flex justify-space-between"
           >
-            <p class="text-body-1 font-weight-bold">{{ name }}</p>
+            <p class="text-body-1 font-weight-bold">{{ title }}</p>
             <p
               :class="`text-body-1 ${
                 positive ? 'text-green-lighten-1' : 'text-red-lighten-1'
