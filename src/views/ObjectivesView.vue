@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-data-table-virtual
+      :headers="tableHeaders"
+      :items="objectives"
+      height="400"
+      item-value="name"
+    ></v-data-table-virtual>
     <v-form @submit.prevent="submitForm">
       <v-row>
         <v-col cols="12" sm="6" md="4">
@@ -24,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
 
@@ -32,6 +38,15 @@ export default defineComponent({
   name: 'SavingsForm',
   setup() {
     const store = useStore(key);
+    const objectives = store.state.objectives;
+
+    const tableHeaders: Array<
+      Record<string, any> & { align: 'start' | 'end' }
+    > = [
+      { title: 'Objective', align: 'start', key: 'title' },
+      { title: 'Cost Per Month', align: 'start', key: 'costPerMonth' },
+      { title: 'Contribution', align: 'start', key: 'contribution' },
+    ];
 
     const title = ref('');
     const costPerMonth = ref(0);
@@ -45,6 +60,8 @@ export default defineComponent({
     };
 
     return {
+      objectives,
+      tableHeaders,
       title,
       costPerMonth,
       submitForm,
