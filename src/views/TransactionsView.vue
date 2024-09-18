@@ -1,6 +1,23 @@
 <template>
   <v-container>
-    <v-form @submit.prevent="submitForm">
+    <v-data-table
+      :headers="tableHeaders"
+      :items="transactions"
+      height="400"
+      item-value="name"
+    >
+      <template v-slot:item.price="{ item }">
+        <p
+          :class="`text-body-1 ${
+            item.positive ? 'text-green-lighten-1' : 'text-red-lighten-1'
+          }`"
+        >
+          {{ item.positive ? '' : '-' }}${{ item.price }}
+        </p>
+      </template>
+    </v-data-table>
+
+    <v-form @submit.prevent="addTransactions">
       <v-row>
         <v-col cols="12" sm="6" md="4">
           <v-text-field v-model="title" label="Title" required></v-text-field>
@@ -30,20 +47,29 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
 
 export default {
-  name: 'SavingsForm',
   setup() {
     const store = useStore(key);
+
+    const transactions = computed(() => store.state.transactions);
 
     const title = ref('');
     const price = ref(0);
     const positive = ref(false);
 
-    const submitForm = () => {
+    const tableHeaders: Array<
+      Record<string, any> & { align: 'start' | 'end' }
+    > = [
+      { title: 'Transactions', align: 'start', key: 'title' },
+      { title: 'Price', align: 'start', key: 'price' },
+      { title: 'Actions', align: 'start', key: 'actions' },
+    ];
+
+    const addTransactions = () => {
       store.commit('addTransactions', {
         id: crypto.randomUUID(),
         title: title.value,
@@ -56,7 +82,9 @@ export default {
       title,
       price,
       positive,
-      submitForm,
+      transactions,
+      tableHeaders,
+      addTransactions,
     };
   },
 };

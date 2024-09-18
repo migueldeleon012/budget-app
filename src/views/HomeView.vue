@@ -90,7 +90,10 @@ export default {
 
   setup() {
     const store = useStore(key);
-    const { income, spent, transactions, objectives, savings } = store.state;
+
+    const state = computed(() => store.state);
+
+    const { transactions, savings, objectives, income, spent } = state.value;
 
     const moneyLeft = computed(() => income - spent);
 

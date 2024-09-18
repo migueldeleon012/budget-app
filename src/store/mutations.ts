@@ -35,12 +35,6 @@ const editObjectives = (state: State, payload: AddContributionPayload) => {
 
 // DELETE
 
-const deleteTransactions = (state: State, payload: string) => {
-  state.transactions = state.transactions.filter(
-    (transaction) => transaction.id !== payload
-  );
-};
-
 const deleteSavings = (state: State, payload: string) => {
   state.savings = state.savings.filter((saving) => saving.id !== payload);
 };
@@ -53,7 +47,7 @@ const deleteObjectives = (state: State, payload: string) => {
 
 const add = { addTransactions, addSavings, addObjectives };
 const edit = { editSavings, editObjectives };
-const del = { deleteTransactions, deleteSavings, deleteObjectives };
+const del = { deleteSavings, deleteObjectives };
 
 export const mutations = {
   ...add,
