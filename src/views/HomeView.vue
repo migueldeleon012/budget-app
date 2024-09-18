@@ -93,13 +93,19 @@ export default {
 
     const state = computed(() => store.state);
 
-    const { transactions, savings, objectives, income, spent } = state.value;
+    const { transactions, savings, objectives, income } = state.value;
 
-    const moneyLeft = computed(() => income - spent);
+    const spent = computed(() =>
+      transactions
+        .filter((transaction) => !transaction.positive)
+        .reduce((acc, transaction) => acc + transaction.price, 0)
+    );
+
+    const moneyLeft = computed(() => income - spent.value);
 
     const doughnutChartData: ChartData<'doughnut', number[], unknown> = {
       labels: ['Spent', 'To Spend'],
-      datasets: [{ data: [spent, moneyLeft.value] }],
+      datasets: [{ data: [spent.value, moneyLeft.value] }],
     };
 
     return {

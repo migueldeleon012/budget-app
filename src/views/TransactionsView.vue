@@ -73,7 +73,7 @@ export default {
       store.commit('addTransactions', {
         id: crypto.randomUUID(),
         title: title.value,
-        price: price.value,
+        price: +price.value,
         positive: positive.value,
       });
     };

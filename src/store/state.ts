@@ -14,7 +14,6 @@ export interface SavingsOrObjectives {
 
 export interface State {
   income: number;
-  spent: number;
   objectives: SavingsOrObjectives[];
   savings: SavingsOrObjectives[];
   transactions: Transactions[];
@@ -22,7 +21,6 @@ export interface State {
 
 export const state: State = {
   income: 28000,
-  spent: 10000,
   objectives: [
     {
       id: crypto.randomUUID(),
