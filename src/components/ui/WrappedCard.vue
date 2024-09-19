@@ -1,8 +1,8 @@
 <template>
-  <v-card rounded="lg" flat :class="`bg-white px-4 py-2 h-100 ${className}`">
+  <v-card rounded="lg" flat :class="`bg-white px-6 py-4 h-100 ${className}`">
     <div class="d-flex flex-column h-100">
       <v-card-title>
-        <h2 class="text-h5 font-weight-bold">{{ title }}</h2>
+        <h2 class="text-h5 font-weight-bold mb-4">{{ title }}</h2>
       </v-card-title>
       <slot name="content"></slot>
       <slot name="actions"></slot>
