@@ -38,7 +38,8 @@ export default {
 </script>
 
 <template>
-  <v-container>
+  <div class="d-flex flex-column pa-6 pt-0 h-100 ga-4">
+    <h1 class="text-h4 font-weight-bold">Savings</h1>
     <DataTable :data="savings" :openEditDialog="openEditDialog" />
 
     <v-dialog v-model="editDialog" max-width="500px">
@@ -46,5 +47,5 @@ export default {
     </v-dialog>
 
     <AddForm />
-  </v-container>
+  </div>
 </template>

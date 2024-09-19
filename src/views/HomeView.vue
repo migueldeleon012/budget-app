@@ -1,16 +1,16 @@
 <script lang="ts">
 import { computed } from 'vue';
-import WrappedCard from '@/components/ui/WrappedCard.vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
 import OverviewCard from '@/components/home/OverviewCard.vue';
-import HomeCard from '@/components/home/HomeCard.vue';
+import SavingsObejctivesCard from '@/components/home/SavingsObejctivesCard.vue';
+import TransactionsCard from '@/components/home/TransactionsCard.vue';
 
 export default {
   components: {
     OverviewCard,
-    HomeCard,
-    WrappedCard,
+    SavingsObejctivesCard,
+    TransactionsCard,
   },
 
   setup() {
@@ -34,7 +34,7 @@ export default {
     <h1 class="text-h4 font-weight-bold">Welcome, User</h1>
     <div class="d-flex ga-4 flex-1-1-0">
       <OverviewCard />
-      <HomeCard
+      <SavingsObejctivesCard
         className="flex-1-1-0"
         title="Objectives"
         :data="objectives"
@@ -42,18 +42,13 @@ export default {
       />
     </div>
     <div class="d-flex ga-4 flex-1-1-0">
-      <HomeCard
+      <SavingsObejctivesCard
         className="w-33"
         title="Savings"
         :data="savings"
         :actions="{ title: 'Go to Savings', path: '/savings' }"
       />
-      <HomeCard
-        className="flex-1-1-0"
-        title="Recent Transactions"
-        :data="transactions"
-        :actions="{ title: 'Go to Recent Transactions', path: '/transactions' }"
-      />
+      <TransactionsCard />
     </div>
   </div>
 </template>

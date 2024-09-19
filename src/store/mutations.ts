@@ -20,7 +20,6 @@ const addObjectives = (state: State, payload: SavingsOrObjectives) => {
 
 const editSavings = (state: State, payload: AddContributionPayload) => {
   const savingsItem = state.savings.find((item) => item.id === payload.id);
-  console.log(savingsItem, payload);
   if (savingsItem) {
     savingsItem.contribution += payload.additionalContribution;
   }

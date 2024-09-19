@@ -24,7 +24,6 @@ export default {
     ];
 
     const del = (item: SavingsOrObjectives, isObjective?: boolean) => {
-      console.log(item.id);
       store.commit(
         `${isObjective ? 'deleteObjectives' : 'deleteSavings'}`,
         item.id
