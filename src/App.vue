@@ -1,6 +1,38 @@
+<script lang="ts">
+import { useRoute } from 'vue-router';
+import Sidebar from './components/TheSidebar.vue';
+import { ref, watch } from 'vue';
+
+export default {
+  components: {
+    Sidebar,
+  },
+  setup() {
+    const route = useRoute();
+    const showSidebar = ref(true);
+
+    watch(
+      () => route.path,
+      (newPath) => {
+        if (newPath === '/') {
+          showSidebar.value = false;
+        } else {
+          showSidebar.value = true;
+        }
+      },
+      { immediate: true }
+    );
+
+    return {
+      showSidebar,
+    };
+  },
+};
+</script>
+
 <template>
   <v-app>
-    <Sidebar />
+    <Sidebar v-if="showSidebar" />
     <v-main>
       <v-container fluid class="bg-grey-lighten-3 h-100">
         <router-view />
@@ -8,16 +40,6 @@
     </v-main>
   </v-app>
 </template>
-
-<script lang="ts">
-import Sidebar from './components/TheSidebar.vue';
-
-export default {
-  components: {
-    Sidebar,
-  },
-};
-</script>
 
 <style>
 * {

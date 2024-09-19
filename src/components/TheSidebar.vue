@@ -1,3 +1,48 @@
+<script lang="ts">
+import { key } from '@/store';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+    const store = useStore(key);
+    const router = useRouter();
+
+    const deleteUser = () => {
+      store.dispatch('deleteUser');
+      router.push({ path: '/' });
+    };
+
+    const rail = ref(false);
+
+    const toggleRail = () => {
+      rail.value = !rail.value;
+    };
+
+    return {
+      rail,
+      navigationItems: [
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', href: '/dashboard' },
+        { title: 'Transactions', icon: 'mdi-cash', href: '/transactions' },
+        {
+          title: 'Savings',
+          icon: 'mdi-piggy-bank-outline',
+          href: '/savings',
+        },
+        {
+          title: 'Objectives',
+          icon: 'mdi-trophy-outline',
+          href: '/objectives',
+        },
+      ],
+      toggleRail,
+      deleteUser,
+    };
+  },
+};
+</script>
+
 <template>
   <v-navigation-drawer :rail="rail">
     <v-container class="pa-0 h-100 d-flex flex-column bg-deep-purple-darken-4">
@@ -21,6 +66,9 @@
         </router-link>
       </v-container>
       <v-container class="pa-0 pb-4 d-flex justify-center">
+        <v-btn size="large" variant="plain" @click="deleteUser"
+          >Delete User?</v-btn
+        >
         <v-btn
           :icon="rail ? 'mdi-chevron-right' : 'mdi-chevron-left'"
           size="large"
@@ -31,39 +79,6 @@
     </v-container>
   </v-navigation-drawer>
 </template>
-
-<script lang="ts">
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const rail = ref(false);
-
-    const toggleRail = () => {
-      rail.value = !rail.value;
-    };
-
-    return {
-      rail,
-      navigationItems: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', href: '/' },
-        { title: 'Transactions', icon: 'mdi-cash', href: '/transactions' },
-        {
-          title: 'Savings',
-          icon: 'mdi-piggy-bank-outline',
-          href: '/savings',
-        },
-        {
-          title: 'Objectives',
-          icon: 'mdi-trophy-outline',
-          href: '/objectives',
-        },
-      ],
-      toggleRail,
-    };
-  },
-};
-</script>
 
 <style scoped>
 .link {

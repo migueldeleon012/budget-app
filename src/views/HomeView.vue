@@ -18,12 +18,13 @@ export default {
 
     const state = computed(() => store.state);
 
-    const { transactions, savings, objectives } = state.value;
+    const { transactions, savings, objectives, userName } = state.value;
 
     return {
       transactions,
       objectives,
       savings,
+      userName
     };
   },
 };
@@ -31,7 +32,7 @@ export default {
 
 <template>
   <div class="d-flex flex-column pa-6 pt-0 h-100 ga-4">
-    <h1 class="text-h4 font-weight-bold">Welcome, User</h1>
+    <h1 class="text-h4 font-weight-bold">Welcome, {{ userName }}</h1>
     <div class="d-flex ga-4 flex-1-1-0">
       <OverviewCard />
       <SavingsObejctivesCard

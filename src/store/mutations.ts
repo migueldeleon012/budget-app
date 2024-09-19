@@ -2,6 +2,18 @@ import type { SavingsOrObjectives, State, Transactions } from './state';
 
 type AddContributionPayload = { id: string; additionalContribution: number };
 
+// USER
+
+const setUser = (state: State, payload: string) => {
+  state.userName = payload;
+  localStorage.setItem('userName', JSON.stringify(payload)); // Save to localStorage
+};
+
+const deleteUser = (state: State) => {
+  state.userName = null;
+  localStorage.removeItem('userName');
+};
+
 // ADD
 
 const addTransactions = (state: State, payload: Transactions) => {
@@ -44,11 +56,13 @@ const deleteObjectives = (state: State, payload: string) => {
   );
 };
 
+const user = { setUser, deleteUser };
 const add = { addTransactions, addSavings, addObjectives };
 const edit = { editSavings, editObjectives };
 const del = { deleteSavings, deleteObjectives };
 
 export const mutations = {
+  ...user,
   ...add,
   ...edit,
   ...del,

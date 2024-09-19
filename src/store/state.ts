@@ -13,6 +13,7 @@ export interface SavingsOrObjectives {
 }
 
 export interface State {
+  userName: string | null;
   income: number;
   objectives: SavingsOrObjectives[];
   savings: SavingsOrObjectives[];
@@ -20,6 +21,7 @@ export interface State {
 }
 
 export const state: State = {
+  userName: localStorage.getItem('userName') || null,
   income: 28000,
   objectives: [
     {
