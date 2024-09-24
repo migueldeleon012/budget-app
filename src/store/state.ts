@@ -27,8 +27,10 @@ export interface State {
 }
 
 export const state: State = {
-  userName: localStorage.getItem('userName') || null,
-  selectedCurrency: localStorage.getItem('selectedCurrency') || null,
+  userName: JSON.parse(localStorage.getItem('userName') || 'null'),
+  selectedCurrency: JSON.parse(
+    localStorage.getItem('selectedCurrency') || 'null'
+  ),
   income: +JSON.parse(localStorage.getItem('income') || '0'),
   objectives: JSON.parse(localStorage.getItem('objectives') || '[]'),
   savings: JSON.parse(localStorage.getItem('savings') || '[]'),
