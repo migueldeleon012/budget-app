@@ -1,33 +1,33 @@
 <script lang="ts">
 import { key } from '@/store';
-import type { SavingsOrObjectives } from '@/store/state';
+import type { SavingsOrGoals } from '@/store/state';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 
 type Props = {
-  itemToEdit: SavingsOrObjectives | null;
-  isObjective?: boolean;
+  itemToEdit: SavingsOrGoals | null;
+  isGoal?: boolean;
   closeEditDialog: () => void;
 };
 
 export default {
-  props: ['itemToEdit', 'isObjective', 'closeEditDialog'],
+  props: ['itemToEdit', 'isGoal', 'closeEditDialog'],
   setup(props: Props) {
     const store = useStore(key);
     const additionalContribution = ref(0);
 
-    const { itemToEdit, closeEditDialog, isObjective } = props;
+    const { itemToEdit, closeEditDialog, isGoal } = props;
 
     const edit = () => {
       if (!itemToEdit) return;
-      store.commit(`${isObjective ? 'editObjectives' : 'editSavings'}`, {
+      store.commit(`${isGoal ? 'editGoals' : 'editSavings'}`, {
         id: itemToEdit.id,
         additionalContribution: +additionalContribution.value,
       });
       closeEditDialog();
     };
 
-    return { additionalContribution, isObjective, edit, closeEditDialog };
+    return { additionalContribution, isGoal, edit, closeEditDialog };
   },
 };
 </script>

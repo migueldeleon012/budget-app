@@ -2,10 +2,10 @@
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
-import type { SavingsOrObjectives } from '@/store/state';
-import AddForm from '@/components/savingsAndObjectives/AddForm.vue';
-import EditForm from '@/components/savingsAndObjectives/EditForm.vue';
-import DataTable from '@/components/savingsAndObjectives/DataTable.vue';
+import type { SavingsOrGoals } from '@/store/state';
+import AddForm from '@/components/savingsAndGoals/AddForm.vue';
+import EditForm from '@/components/savingsAndGoals/EditForm.vue';
+import DataTable from '@/components/savingsAndGoals/DataTable.vue';
 
 export default {
   components: { AddForm, EditForm, DataTable },
@@ -15,9 +15,9 @@ export default {
 
     // EDIT
     const editDialog = ref(false);
-    const selectedItem = ref<SavingsOrObjectives | null>(null);
+    const selectedItem = ref<SavingsOrGoals | null>(null);
 
-    const openEditDialog = (item: SavingsOrObjectives) => {
+    const openEditDialog = (item: SavingsOrGoals) => {
       selectedItem.value = item;
       editDialog.value = true;
     };

@@ -18,14 +18,19 @@ const router = createRouter({
       component: () => import('../views/TransactionsView.vue'),
     },
     {
-      path: '/objectives',
-      name: 'objectives',
-      component: () => import('../views/ObjectivesView.vue'),
+      path: '/goals',
+      name: 'goals',
+      component: () => import('../views/GoalsView.vue'),
     },
     {
       path: '/savings',
       name: 'savings',
       component: () => import('../views/SavingsView.vue'),
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/SettingsView.vue'),
     },
   ],
   linkActiveClass: 'active',

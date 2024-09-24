@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
 import OverviewCard from '@/components/home/OverviewCard.vue';
-import SavingsObejctivesCard from '@/components/home/SavingsObejctivesCard.vue';
+import SavingsObejctivesCard from '@/components/home/SavingsGoalsCard.vue';
 import TransactionsCard from '@/components/home/TransactionsCard.vue';
 
 export default {
@@ -18,13 +18,13 @@ export default {
 
     const state = computed(() => store.state);
 
-    const { transactions, savings, objectives, userName } = state.value;
+    const { transactions, savings, goals, userName } = state.value;
 
     return {
       transactions,
-      objectives,
+      goals,
       savings,
-      userName
+      userName,
     };
   },
 };
@@ -37,9 +37,9 @@ export default {
       <OverviewCard />
       <SavingsObejctivesCard
         className="flex-1-1-0"
-        title="Objectives"
-        :data="objectives"
-        :actions="{ title: 'Go to Objectives', path: '/objectives' }"
+        title="Goals"
+        :data="goals"
+        :actions="{ title: 'Go to Goals', path: '/goals' }"
       />
     </div>
     <div class="d-flex ga-4 flex-1-1-0">

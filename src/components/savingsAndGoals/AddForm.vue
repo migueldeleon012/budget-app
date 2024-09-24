@@ -4,27 +4,27 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 type Props = {
-  isObjectives?: boolean;
+  isGoal?: boolean;
 };
 
 export default {
   setup(props: Props) {
     const store = useStore(key);
     const title = ref('');
-    const costPerMonth = ref(0);
+    const cost = ref(0);
 
-    const buttonDisabled = computed(() => !title.value || !costPerMonth.value);
+    const buttonDisabled = computed(() => !title.value || !cost.value);
 
     const add = () => {
-      store.commit(`${props.isObjectives ? 'addObjectives' : 'addSavings'}`, {
+      store.commit(`${props.isGoal ? 'addGoals' : 'addSavings'}`, {
         id: crypto.randomUUID(),
         title: title.value,
-        costPerMonth: costPerMonth.value,
+        cost: cost.value,
         contribution: 0,
       });
     };
 
-    return { buttonDisabled, title, costPerMonth, add, ...props };
+    return { buttonDisabled, title, cost, add, ...props };
   },
 };
 </script>
@@ -33,7 +33,7 @@ export default {
   <v-form @submit.prevent="add">
     <v-text-field v-model="title" label="Title" required></v-text-field>
     <v-text-field
-      v-model="costPerMonth"
+      v-model="cost"
       label="Cost Per Month"
       type="number"
       required

@@ -11,18 +11,18 @@ export interface Transactions {
   positive: boolean;
 }
 
-export interface SavingsOrObjectives {
+export interface SavingsOrGoals {
   id: string;
   title: string;
   contribution: number;
-  costPerMonth: number;
+  cost: number;
 }
 export interface State {
   userName: UserInfo['userName'] | null;
   selectedCurrency: UserInfo['selectedCurrency'] | null;
   income: UserInfo['income'] | null;
-  objectives: SavingsOrObjectives[];
-  savings: SavingsOrObjectives[];
+  goals: SavingsOrGoals[];
+  savings: SavingsOrGoals[];
   transactions: Transactions[];
 }
 
@@ -32,7 +32,7 @@ export const state: State = {
     localStorage.getItem('selectedCurrency') || 'null'
   ),
   income: +JSON.parse(localStorage.getItem('income') || '0'),
-  objectives: JSON.parse(localStorage.getItem('objectives') || '[]'),
+  goals: JSON.parse(localStorage.getItem('goals') || '[]'),
   savings: JSON.parse(localStorage.getItem('savings') || '[]'),
   transactions: JSON.parse(localStorage.getItem('transactions') || '[]'),
 };

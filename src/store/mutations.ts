@@ -1,11 +1,18 @@
 import {
-  type SavingsOrObjectives,
+  type SavingsOrGoals,
   type State,
   type Transactions,
   type UserInfo,
 } from './state';
 
 type AddContributionPayload = { id: string; additionalContribution: number };
+
+// RESET MONTHLY
+
+const resetMonthly = (state: State) => {
+  state.savings = [];
+  state.transactions = [];
+};
 
 // USER
 
@@ -26,7 +33,7 @@ const deleteUser = (state: State) => {
   state.userName = null;
   state.income = null;
   state.selectedCurrency = null;
-  state.objectives = [];
+  state.goals = [];
   state.savings = [];
   state.transactions = [];
   localStorage.clear();
@@ -39,14 +46,14 @@ const addTransactions = (state: State, payload: Transactions) => {
   localStorage.setItem('transactions', JSON.stringify(state.transactions));
 };
 
-const addSavings = (state: State, payload: SavingsOrObjectives) => {
+const addSavings = (state: State, payload: SavingsOrGoals) => {
   state.savings.push(payload);
   localStorage.setItem('savings', JSON.stringify(state.savings));
 };
 
-const addObjectives = (state: State, payload: SavingsOrObjectives) => {
-  state.objectives.push(payload);
-  localStorage.setItem('objectives', JSON.stringify(state.objectives));
+const addGoals = (state: State, payload: SavingsOrGoals) => {
+  state.goals.push(payload);
+  localStorage.setItem('goals', JSON.stringify(state.goals));
 };
 
 // EDIT
@@ -59,11 +66,11 @@ const editSavings = (state: State, payload: AddContributionPayload) => {
   }
 };
 
-const editObjectives = (state: State, payload: AddContributionPayload) => {
-  const objectiveItem = state.objectives.find((item) => item.id === payload.id);
-  if (objectiveItem) {
-    objectiveItem.contribution += payload.additionalContribution;
-    localStorage.setItem('objectives', JSON.stringify(state.objectives));
+const editGoals = (state: State, payload: AddContributionPayload) => {
+  const goalItem = state.goals.find((item) => item.id === payload.id);
+  if (goalItem) {
+    goalItem.contribution += payload.additionalContribution;
+    localStorage.setItem('goals', JSON.stringify(state.goals));
   }
 };
 
@@ -74,21 +81,20 @@ const deleteSavings = (state: State, payload: string) => {
   localStorage.setItem('savings', JSON.stringify(state.savings));
 };
 
-const deleteObjectives = (state: State, payload: string) => {
-  state.objectives = state.objectives.filter(
-    (objective) => objective.id !== payload
-  );
-  localStorage.setItem('objectives', JSON.stringify(state.objectives));
+const deleteGoals = (state: State, payload: string) => {
+  state.goals = state.goals.filter((goal) => goal.id !== payload);
+  localStorage.setItem('goals', JSON.stringify(state.goals));
 };
 
 const user = { setUser, deleteUser };
-const add = { addTransactions, addSavings, addObjectives };
-const edit = { editSavings, editObjectives };
-const del = { deleteSavings, deleteObjectives };
+const add = { addTransactions, addSavings, addGoals };
+const edit = { editSavings, editGoals };
+const del = { deleteSavings, deleteGoals };
 
 export const mutations = {
   ...user,
   ...add,
   ...edit,
   ...del,
+  resetMonthly,
 };

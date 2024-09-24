@@ -13,19 +13,19 @@ export default {
     <template #content>
       <v-card-text class="flex-1-1-0 overflow-auto">
         <div
-          v-for="{ title, costPerMonth, contribution } in data"
+          v-for="{ title, cost, contribution } in data"
           :key="title"
           class="mb-6"
         >
           <text-with-progress
             :title="title"
             :partial="contribution"
-            :total="costPerMonth"
+            :total="cost"
           >
             <slot
               name="textWithProgress"
               :partial="contribution"
-              :total="costPerMonth"
+              :total="cost"
             ></slot>
           </text-with-progress>
         </div>

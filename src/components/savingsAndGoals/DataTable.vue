@@ -1,33 +1,30 @@
 <script lang="ts">
 import { key } from '@/store';
-import type { SavingsOrObjectives } from '@/store/state';
+import type { SavingsOrGoals } from '@/store/state';
 import { useStore } from 'vuex';
 
 type Props = {
-  data: SavingsOrObjectives[];
-  openEditDialog: (item: SavingsOrObjectives) => void;
-  isObjective?: boolean;
+  data: SavingsOrGoals[];
+  openEditDialog: (item: SavingsOrGoals) => void;
+  isGoal?: boolean;
 };
 
 export default {
-  props: ['data', 'isObjective', 'openEditDialog'],
+  props: ['data', 'isGoal', 'openEditDialog'],
   setup(props: Props) {
     const store = useStore(key);
 
     const tableHeaders: Array<
       Record<string, any> & { align: 'start' | 'end' }
     > = [
-      { title: 'Objective', align: 'start', key: 'title' },
-      { title: 'Cost Per Month', align: 'start', key: 'costPerMonth' },
+      { title: 'Goal', align: 'start', key: 'title' },
+      { title: 'Cost Per Month', align: 'start', key: 'cost' },
       { title: 'Contribution', align: 'start', key: 'contribution' },
       { title: 'Actions', align: 'start', key: 'actions' },
     ];
 
-    const del = (item: SavingsOrObjectives, isObjective?: boolean) => {
-      store.commit(
-        `${isObjective ? 'deleteObjectives' : 'deleteSavings'}`,
-        item.id
-      );
+    const del = (item: SavingsOrGoals, isGoal?: boolean) => {
+      store.commit(`${isGoal ? 'deleteGoals' : 'deleteSavings'}`, item.id);
     };
 
     return { tableHeaders, del, ...props };
@@ -46,7 +43,7 @@ export default {
       <v-icon class="me-2" size="small" @click="openEditDialog(item)">
         mdi-pencil
       </v-icon>
-      <v-icon size="small" @click="del(item, isObjective)"> mdi-delete </v-icon>
+      <v-icon size="small" @click="del(item, isGoal)"> mdi-delete </v-icon>
     </template>
   </v-data-table>
 </template>

@@ -10,7 +10,7 @@ const user: ActionTree<State, State> = {
   },
 };
 
-const objectives: ActionTree<State, State> = {};
+const goals: ActionTree<State, State> = {};
 const savings: ActionTree<State, State> = {};
 const transactions: ActionTree<State, State> = {};
 

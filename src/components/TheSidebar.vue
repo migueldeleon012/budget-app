@@ -31,9 +31,9 @@ export default {
           href: '/savings',
         },
         {
-          title: 'Objectives',
+          title: 'Goals',
           icon: 'mdi-trophy-outline',
-          href: '/objectives',
+          href: '/goals',
         },
       ],
       toggleRail,
@@ -65,10 +65,16 @@ export default {
           <p v-if="!rail" class="text-body-1">{{ item.title }}</p>
         </router-link>
       </v-container>
+      <router-link
+        to="/settings"
+        :class="`d-flex ga-1 mx-4 text-decoration-none pa-2 color-white rounded-sm ${
+          !rail ? 'justify-start' : 'justify-center'
+        }`"
+      >
+        <v-icon icon="mdi-cog-outline" size="1.5rem"></v-icon>
+        <p v-if="!rail" class="text-body-1">Settings</p>
+      </router-link>
       <v-container class="pa-0 pb-4 d-flex justify-center">
-        <v-btn size="large" variant="plain" @click="deleteUser"
-          >Delete User?</v-btn
-        >
         <v-btn
           :icon="rail ? 'mdi-chevron-right' : 'mdi-chevron-left'"
           size="large"

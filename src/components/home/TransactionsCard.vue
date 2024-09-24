@@ -1,6 +1,5 @@
 <script lang="ts">
 import WrappedCard from '../ui/WrappedCard.vue';
-import TextWithProgress from '../ui/TextWithProgress.vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
 import { computed } from 'vue';
