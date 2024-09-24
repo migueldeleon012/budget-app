@@ -1,3 +1,9 @@
+export interface UserInfo {
+  userName: string;
+  income: number;
+  selectedCurrency: string;
+}
+
 export interface Transactions {
   id: string | number;
   title: string;
@@ -11,10 +17,10 @@ export interface SavingsOrObjectives {
   contribution: number;
   costPerMonth: number;
 }
-
 export interface State {
-  userName: string | null;
-  income: number;
+  userName: UserInfo['userName'] | null;
+  selectedCurrency: UserInfo['selectedCurrency'] | null;
+  income: UserInfo['income'] | null;
   objectives: SavingsOrObjectives[];
   savings: SavingsOrObjectives[];
   transactions: Transactions[];
@@ -22,44 +28,9 @@ export interface State {
 
 export const state: State = {
   userName: localStorage.getItem('userName') || null,
-  income: 28000,
-  objectives: [
-    {
-      id: crypto.randomUUID(),
-      title: 'IPhone',
-      contribution: 250,
-      costPerMonth: 500,
-    },
-    {
-      id: crypto.randomUUID(),
-      title: 'Macbook',
-      contribution: 300,
-      costPerMonth: 1000,
-    },
-  ],
-  savings: [
-    {
-      id: crypto.randomUUID(),
-      title: 'Wedding',
-      contribution: 250,
-      costPerMonth: 500,
-    },
-    {
-      id: crypto.randomUUID(),
-      title: 'Vacation',
-      contribution: 300,
-      costPerMonth: 1000,
-    },
-  ],
-  transactions: [
-    {
-      id: crypto.randomUUID(),
-      title: 'Phone Case',
-      price: 980,
-      positive: false,
-    },
-    { id: crypto.randomUUID(), title: 'Salary', price: 28000, positive: true },
-    { id: crypto.randomUUID(), title: 'Lunch', price: 1200, positive: false },
-    { id: crypto.randomUUID(), title: 'Coffee', price: 580, positive: false },
-  ],
+  selectedCurrency: localStorage.getItem('selectedCurrency') || null,
+  income: +JSON.parse(localStorage.getItem('income') || '0'),
+  objectives: JSON.parse(localStorage.getItem('objectives') || '[]'),
+  savings: JSON.parse(localStorage.getItem('savings') || '[]'),
+  transactions: JSON.parse(localStorage.getItem('transactions') || '[]'),
 };
