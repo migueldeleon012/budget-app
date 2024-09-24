@@ -3,8 +3,11 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   props: {
-    modelValue: {
+    className: {
       type: String,
+    },
+    modelValue: {
+      type: [String, Number],
       required: true,
     },
     label: {
@@ -31,7 +34,7 @@ export default defineComponent({
 });
 </script>
 <template>
-  <div class="d-flex flex-column">
+  <div :class="`d-flex flex-column ${className}`">
     <label v-if="label" :for="id">{{ label }}</label>
 
     <input
@@ -39,7 +42,9 @@ export default defineComponent({
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
-      :class="`px-4 py-2 border-sm rounded-lg ${errorMessage && 'border-red'}`"
+      :class="`px-4 py-2 border-md rounded-lg bg-white border-black ${
+        errorMessage && 'border-red'
+      }`"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
@@ -49,4 +54,4 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang="css" scoped></style>
+<style lang="css"></style>

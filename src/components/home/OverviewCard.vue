@@ -15,7 +15,7 @@ export default {
 
     const state = computed(() => store.state);
 
-    const { transactions, income } = state.value;
+    const { transactions, income, selectedCurrency } = state.value;
 
     const spent = computed(() =>
       transactions
@@ -23,7 +23,7 @@ export default {
         .reduce((acc, transaction) => acc + transaction.price, 0)
     );
 
-    const moneyLeft = computed(() => income - spent.value);
+    const moneyLeft = computed(() => income! - spent.value);
 
     const doughnutChartData: ChartData<'doughnut', number[], unknown> = {
       labels: ['Spent', 'To Spend'],
@@ -34,6 +34,7 @@ export default {
       income,
       spent,
       transactions,
+      selectedCurrency,
       doughnutChartData,
     };
   },
@@ -50,15 +51,21 @@ export default {
         <div class="d-flex ga-16 justify-center">
           <div>
             <p class="text-subtitle-1">You Earn</p>
-            <p class="text-h5 font-weight-bold">$ {{ income }}</p>
+            <p class="text-h5 font-weight-bold">
+              {{ selectedCurrency }} {{ income }}
+            </p>
           </div>
           <div>
             <p class="text-subtitle-1">You Spent</p>
-            <p class="text-h5 font-weight-bold">$ {{ spent }}</p>
+            <p class="text-h5 font-weight-bold">
+              {{ selectedCurrency }} {{ spent }}
+            </p>
           </div>
           <div>
             <p class="text-subtitle-1">You still have</p>
-            <p class="text-h5 font-weight-bold">$ {{ income - spent }}</p>
+            <p class="text-h5 font-weight-bold">
+              {{ selectedCurrency }} {{ income! - spent }}
+            </p>
           </div>
         </div>
       </v-container>

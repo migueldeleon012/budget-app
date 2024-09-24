@@ -23,6 +23,7 @@ export default {
   },
 };
 </script>
+
 <template>
   <v-data-table
     :headers="tableHeaders"

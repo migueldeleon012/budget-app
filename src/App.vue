@@ -51,4 +51,10 @@ export default {
 .color-white {
   color: white !important;
 }
+.border-black {
+  border-color: #424242 !important;
+}
+.border-red {
+  border-color: #c62828 !important;
+}
 </style>

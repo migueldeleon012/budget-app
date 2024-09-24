@@ -15,8 +15,9 @@ export default {
 
     const buttonDisabled = computed(() => !title.value || !costPerMonth.value);
 
-    const add = (isObjectives?: boolean) => {
-      store.commit(`${isObjectives ? 'addObjectives' : 'addSavings'}`, {
+    const add = () => {
+      store.commit(`${props.isObjectives ? 'addObjectives' : 'addSavings'}`, {
+        id: crypto.randomUUID(),
         title: title.value,
         costPerMonth: costPerMonth.value,
         contribution: 0,
@@ -29,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <v-form @submit.prevent="add(isObjectives)">
+  <v-form @submit.prevent="add">
     <v-text-field v-model="title" label="Title" required></v-text-field>
     <v-text-field
       v-model="costPerMonth"

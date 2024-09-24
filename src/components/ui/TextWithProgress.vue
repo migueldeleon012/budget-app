@@ -1,17 +1,8 @@
-<template>
-  <div class="d-flex justify-space-between align-center mb-2">
-    <span class="font-weight-bold text-body-1">{{ title }}</span>
-    <slot>
-      <span> ${{ partial }} / ${{ total }} </span>
-    </slot>
-  </div>
-  <v-progress-linear
-    color="pink-lighten-3"
-    :model-value="(partial / total) * 100"
-  ></v-progress-linear>
-</template>
-
 <script lang="ts">
+import { key } from '@/store';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
   props: {
     title: {
@@ -29,5 +20,25 @@ export default {
       default: 100,
     },
   },
+  setup() {
+    const store = useStore(key);
+
+    const { selectedCurrency } = ref(store.state).value;
+
+    return { selectedCurrency };
+  },
 };
 </script>
+
+<template>
+  <div class="d-flex justify-space-between align-center mb-2">
+    <span class="font-weight-bold text-body-1">{{ title }}</span>
+    <slot>
+      <span> {{ selectedCurrency }} {{ partial }} / ${{ total }} </span>
+    </slot>
+  </div>
+  <v-progress-linear
+    color="pink-lighten-3"
+    :model-value="(partial / total) * 100"
+  ></v-progress-linear>
+</template>
